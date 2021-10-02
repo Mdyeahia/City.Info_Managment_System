@@ -18,16 +18,18 @@ namespace City.IMS.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class CityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        public CityDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-        }
 
-        public static ApplicationDbContext Create()
+        }
+        public DbSet<Country> Countries { get; set; }
+
+        public static CityDbContext Create()
         {
-            return new ApplicationDbContext();
+            return new CityDbContext();
         }
     }
 }
