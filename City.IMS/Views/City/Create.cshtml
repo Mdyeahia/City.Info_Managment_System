@@ -35,7 +35,7 @@
     </div>
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
         <button type="button" id="saveBtn" class="btn btn-danger">Save</button>
-        <button type="button" id="cancelBtn" class="btn btn-warning">Cancel</button>
+        <button type="reset"class="btn btn-warning">Cancel</button>
     </div>
 </form>
 
@@ -48,15 +48,25 @@
             data: $('#CreateTable').serialize()
         })
             .done(function (response) {
-                console.log(response);
-                @*//window.location.href = '@Url.Action("Create", "City", new { cuntries = Model.countries })';*@
-
+                if (response.success) {
+                    ReloadListing()
+                } else {
+                    console.log("error")
+                }
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("FAIL");
             });
     });
-
+    function ReloadListing() {
+        $.ajax({
+            url: '@Url.Action("CityTable", "City")',
+            method: 'Get',
+        })
+        .done(function (response) {
+            $("#citylistingArea").html(response);
+        })
+    }
 
 
 </script>

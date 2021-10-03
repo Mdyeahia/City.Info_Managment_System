@@ -14,6 +14,7 @@ namespace City.IMS.Controllers
         // GET: Country
         public ActionResult Index()
         {
+            
             return View();
         }
         public ActionResult Create()
@@ -22,18 +23,28 @@ namespace City.IMS.Controllers
 
         }
         [HttpPost]
-        public ActionResult Create (Country data)
+        public JsonResult Create (Country data)
         {
-            
-            var model = new Country();
-            
-            model.Name = data.Name;
-            model.About = data.About;
+            JsonResult result = new JsonResult();
+            if(ModelState.IsValid)
+            {
+                var model = new Country();
 
-            context.Countries.Add(model);
-            context.SaveChanges();
-            //Redirect(Request.UrlReferrer.ToString());
-            return PartialView();
+                model.Name = data.Name;
+                model.About = data.About;
+
+                context.Countries.Add(model);
+                context.SaveChanges();
+                
+                result.Data = new { success = true };
+            }
+            else
+            {
+                result.Data = new { success = false, message = "Invalid inputs." };
+            }
+            
+            return result;
+ 
         }
         public ActionResult CountryTable()
         {

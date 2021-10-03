@@ -4,18 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="citytable">
-    <div >
+<div id="formArea">
+    <div>
         @{
             Html.RenderAction("Create");
         }
     </div>
     <hr />
-    <div>
+    <div id="citylistingArea">
         @{
             Html.RenderAction("CityTable");
         }
     </div>
+    
 
 </div>
 

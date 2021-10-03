@@ -3,17 +3,19 @@
 
 
 <form id="CreateTable">
-    <div class="form-group">
-        <label>Name</label>
-        <input id="name" name="Name" type="text" class="form-control" placeholder="Enter your name" />
-    </div>
-    <div class="form-group">
-        <label>About</label>
-        <input class="form-control" name="About" placeholder="Write About">
-    </div>
-    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" id="saveBtn" class="btn btn-danger">Save</button>
-        <button type="button" id="cancelBtn" class="btn btn-warning">Cancel</button>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>Name</label>
+            <input id="name" name="Name" type="text" class="form-control" placeholder="Enter your name" />
+        </div>
+        <div class="form-group">
+            <label>About</label>
+            <input class="form-control" name="About" placeholder="Write About">
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" id="saveBtn" class="btn btn-success">Save</button>
+            <button type="reset"class="btn btn-secondary">Cancel</button>
+        </div>
     </div>
 </form>
 
@@ -26,8 +28,12 @@
             data: $('#CreateTable').serialize()
         })
             .done(function (response) {
-                console.log(response);
-                window.location.href = window.location.href;
+                if (response.success) {
+                    ReloadListing()
+                       
+                } else {
+                    console.log("error")
+                }
 
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
@@ -35,6 +41,15 @@
             });
     });
 
-
+     function ReloadListing() {
+        $.ajax({
+            url: '@Url.Action("CountryTable", "Country")',
+            method: 'Get',
+        })
+        .done(function (response) {
+            $("#countrylistingArea").html(response);
+        })
+    }
+  
 
 </script>
