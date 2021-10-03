@@ -168,9 +168,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Migrations\202110022042254_citymodelAdded.cs" />
+    <Compile Include="Migrations\202110022042254_citymodelAdded.Designer.cs">
+      <DependentUpon>202110022042254_citymodelAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Citymodel.cs" />
+    <Compile Include="ViewModels\CityViewModels.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -246,6 +253,9 @@
     <Content Include="Views\Country\Index.cshtml" />
     <Content Include="Views\Country\Create.cshtml" />
     <Content Include="Views\Country\CountryTable.cshtml" />
+    <Content Include="Views\City\Create.cshtml" />
+    <Content Include="Views\City\Index.cshtml" />
+    <Content Include="Views\City\CityTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -266,6 +276,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202110021717189_CountryAdded.resx">
       <DependentUpon>202110021717189_CountryAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110022042254_citymodelAdded.resx">
+      <DependentUpon>202110022042254_citymodelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

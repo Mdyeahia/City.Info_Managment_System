@@ -1,0 +1,22 @@
+﻿@model City.IMS.ViewModels.CitycreateViewModels
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="citytable">
+    <div >
+        @{
+            Html.RenderAction("Create");
+        }
+    </div>
+    <hr />
+    <div>
+        @{
+            Html.RenderAction("CityTable");
+        }
+    </div>
+
+</div>
+
+

@@ -26,6 +26,7 @@ namespace City.IMS.Models
 
         }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Citymodel> Citymodels { get; set; }
 
         public static CityDbContext Create()
         {
