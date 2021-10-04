@@ -21,4 +21,12 @@ namespace City.IMS.ViewModels
     {
         public List<Citymodel> citymodels { get; set; }
     }
+    public class CityListingViewModel
+    {
+        public string CityName { get; set; }
+        public int? CountryId { get; set; }
+        public List<Country> Countries { get; set; }
+        public List<Citymodel> Citymodels { get; set; }
+        public Pager Pager { get; set; }
+    }
 }
