@@ -267,6 +267,7 @@
     <Content Include="Views\City\Index.cshtml" />
     <Content Include="Views\City\CityTable.cshtml" />
     <Content Include="Views\City\CityListing.cshtml" />
+    <Content Include="Views\Country\CountryListing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

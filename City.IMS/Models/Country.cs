@@ -14,6 +14,6 @@ namespace City.IMS.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string About { get; set; }
-        public List<Citymodel> Citymodels { get; set; }
+        public  ICollection<Citymodel> Citymodels { get; set; }
     }
 }

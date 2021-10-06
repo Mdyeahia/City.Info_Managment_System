@@ -10,4 +10,11 @@ namespace City.IMS.ViewModels
     {
         public List<Country> countries { get; set; }
     }
+    public class CountryListingViewModel
+    {
+        public List<Country> countries { get; set; }
+        public string CountryName { get; set; }
+        public Pager Pager { get; set; }
+        public List<Citymodel> Cities { get; set; }
+    }
 }

@@ -3,6 +3,7 @@ using City.IMS.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 
@@ -54,6 +55,29 @@ namespace City.IMS.Controllers
 
             return PartialView(model);
         }
+        public ActionResult CountryListing(string countryName,int? pageNo, int pageSize = 3)
+        {
 
+            pageNo = pageNo ?? 1;
+            int skipCount = (int)(pageSize * (pageNo - 1));
+            CountryListingViewModel model = new CountryListingViewModel();
+            model.CountryName = countryName;
+            
+            var Allcountry = context.Countries.AsQueryable();
+            
+            if (!string.IsNullOrEmpty(countryName))
+            {
+                Allcountry = Allcountry.Where(c => c.Name.ToLower().Contains(countryName.ToLower()));
+               
+            }
+           
+            model.Pager = new Pager(Allcountry.Count(), pageNo, pageSize);
+            model.countries = Allcountry.OrderBy(a => a.Name)
+                                        .Skip(skipCount).Take(pageSize)
+                                        .Include(a=>a.Citymodels)
+                                        .ToList();
+
+            return View(model);
+        }
     }
 }

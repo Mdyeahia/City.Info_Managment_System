@@ -1,47 +1,29 @@
-﻿@model City.IMS.ViewModels.CityListingViewModel
+﻿@model City.IMS.ViewModels.CountryListingViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CountryListing";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    var countryId = Model.CountryId.HasValue ? Model.CountryId.Value : 0;
-}
+
+<h2>CountryListing</h2>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<div  class="row">
+<div class="row">
     <div class="col-lg-12">
         <div class="row">
             <div class="col col-lg-12">
-                <h2>View Cities</h2>
+                <h2>View Countries</h2>
                 <hr />
             </div>
         </div>
         <div class="row mb-3">
             <div class="col col-lg-12">
-                <form id="CityForm">
+                <form id="CountryForm">
                     <div class="input-group">
-                        <input type="text" id="searchTxt" name="search" class="form-control mr-1" placeholder="Search by title..." value="@Model.CityName">
-                        @if (Model.Countries != null && Model.Countries.Count() > 0)
-                        {
-                            <select class="form-control mr-1" name="CountryId" id="selectCountry">
-                                <option value="0" disabled selected>
-                                    Select Category
-                                </option>
-                                @foreach (var country in Model.Countries)
-                                {
-                                    var selected = country.Id == countryId ? "selected" : string.Empty;
-                                    <option value="@country.Id" @selected>
-                                        @country.Name
-                                    </option>
-                                }
-                            </select>
-                        }
-
-
+                        <input type="text" id="searchTxt" name="search" class="form-control mr-1" placeholder="Search by title..." value="@Model.CountryName">
                         <div class="input-group-append link-danger" id="button-addon4">
                             <button id="searchBtn" class="btn btn-primary mr-1" type="button">Search</button>
                         </div>
@@ -57,44 +39,31 @@
                     <tr>
                         <td>SL#</td>
 
-                        <td>City Name</td>
+                        <td>Country Name</td>
 
                         <td>About</td>
 
+                        <td>No. Of Cities</td>
+
                         <td>No. Of Dwellers</td>
-
-                        <td>Location</td>
-
-                        <td>Weather</td>
-
-                        <td>Country</td>
-
-                        <td>About Country</td>
                     </tr>
 
                 </thead>
                 <tbody>
-                    @if (Model.Citymodels != null && Model.Citymodels.Count > 0)
+                    @if (Model.countries != null && Model.countries.Count > 0)
                     {
-                        foreach (var city in Model.Citymodels)
+                        foreach (var country in Model.countries)
                         {
                             <tr>
-                                <td>@city.Id</td>
+                                <td>@country.Id</td>
 
-                                <td>@city.Name</td>
+                                <td>@country.Name</td>
 
-                                <td>@city.About</td>
+                                <td>@country.About</td>
 
-                                <td>@city.Dwellers</td>
+                                <td>@country.Citymodels.Count</td>
 
-                                <td>@city.Location</td>
-
-                                <td>@city.Weather</td>
-
-                                <td>@city.Country.Name</td>
-
-                                <td>@city.Country.About</td>
-
+                                <td>@country.Citymodels.Sum(a=>a.Dwellers)</td>
                             </tr>
                         }
 
@@ -103,7 +72,7 @@
                     {
                         <tr>
                             <td colspan="12" class="text-center alert alert-danger">
-                                No City data found!!!.
+                                No Country data found!!!.
                             </td>
                         </tr>
                     }
@@ -120,14 +89,14 @@
                         else
                         {
                             <li class="page-item">
-                                <a class="pageDataLink page-link text-primary" data-href="@Url.Action("CityListing", "City", new { pageNo = Model.Pager.CurrentPage - 1, categoryId = Model.CountryId, search = Model.CityName })" style="cursor:pointer">Previous</a>
+                                <a class="pageDataLink page-link text-primary" data-href="@Url.Action("CountryListing", "Country", new { pageNo = Model.Pager.CurrentPage - 1,search = Model.CountryName })" style="cursor:pointer">Previous</a>
                             </li>
                         }
                         @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
                         {
                             var active = page == Model.Pager.CurrentPage ? "active" : string.Empty;
                             <li class="page-item @active">
-                                <a class="pageDataLink page-link" data-href="@Url.Action("CityListing", "City", new { pageNo = page, categoryId = Model.CountryId, search = Model.CityName })" style="cursor:pointer">@page</a>
+                                <a class="pageDataLink page-link" data-href="@Url.Action("CountryListing", "Country", new { pageNo = page,search = Model.CountryName })" style="cursor:pointer">@page</a>
                             </li>
                         }
                         @if (Model.Pager.CurrentPage == Model.Pager.EndPage)
@@ -137,7 +106,7 @@
                         else
                         {
                             <li class="page-item">
-                                <a class="pageDataLink page-link text-primary" data-href="@Url.Action("CityListing", "City", new { pageNo = Model.Pager.CurrentPage + 1, categoryId = Model.CountryId, search = Model.CityName })" style="cursor:pointer">Next</a>
+                                <a class="pageDataLink page-link text-primary" data-href="@Url.Action("CountryListing", "Country", new { pageNo = Model.Pager.CurrentPage + 1,search = Model.CountryName })" style="cursor:pointer">Next</a>
                             </li>
                         }
                     </ul>
@@ -148,34 +117,12 @@
 </div>
 
 <script>
-    $("#selectCountry").change(function () {
-        $.ajax({
-            url: '@Url.Action("CityListing", "City")',
-            data: {
-                search: $("#searchTxt").val(),
-                countryId: $("#selectCountry").val()
-            }
-
-        })
-            .done(function (response) {
-
-                $("#ListingTable").html(response);
-
-
-            })
-            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("FAIL");
-            });
-
-
-    });
-
     $("#searchBtn").click(function () {
         $.ajax({
-            url: '@Url.Action("CityListing", "City")',
+            url: '@Url.Action("CountryListing", "Country")',
             data: {
 
-                cityName: $("#searchTxt").val()
+                CountryName: $("#searchTxt").val()
             }
 
         })

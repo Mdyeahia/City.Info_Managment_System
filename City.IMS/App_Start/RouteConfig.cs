@@ -16,7 +16,7 @@ namespace City.IMS
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "City", action = "CityListing", id = UrlParameter.Optional }
+                defaults: new { controller = "Country", action = "CountryListing", id = UrlParameter.Optional }
             );
         }
     }
